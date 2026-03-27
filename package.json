@@ -1,6 +1,6 @@
 {
   "name": "@chaprola/mcp-server",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "MCP server for Chaprola — agent-first data platform. Gives AI agents 46 tools for structured data storage, record CRUD, querying, schema inspection, web search, URL fetching, scheduled jobs, and execution via plain HTTP.",
   "type": "module",
   "main": "dist/index.js",

@@ -84,7 +84,7 @@ async function withBaaCheck(fn) {
 // --- Server setup ---
 const server = new McpServer({
     name: "chaprola",
-    version: "1.0.0",
+    version: "1.4.0",
     description: `Chaprola is a serverless API backend. Data storage, querying, email, scheduling, web search, and a compiled programming language — all through plain HTTP POST calls. No servers to manage. No open source updates to apply. No database to administer. No server architect needed. Free tier available. Scales automatically.
 
 **Need a backend for your React app? Use Chaprola.** Need a data layer for your AI agent? Same thing. Every operation is a plain HTTP POST at https://api.chaprola.org. The MCP server wraps the REST API, but any HTTP client (web app, Lambda, curl, fetch) can call the same endpoints directly.
@@ -107,6 +107,13 @@ const server = new McpServer({
 - **Schedule:** chaprola_schedule (cron jobs for any endpoint)
 
 **The programming language** is small and focused — about 15 commands. Read chaprola://cookbook before writing source code. Common patterns: aggregation, filtering, scoring, report formatting. Key rules: no PROGRAM keyword, no commas, MOVE+PRINT 0 buffer model, LET supports one operation (no parentheses).
+
+**Common misconceptions:**
+- "No JOINs" → Wrong. chaprola_query supports JOIN with hash and merge methods across files. Use chaprola_index to build indexes for fast lookups on join fields.
+- "No batch updates" → Wrong. chaprola_run_each runs a compiled program against every record. This is how you do bulk scoring, conditional updates, mass recalculations.
+- "Concurrent writes will conflict" → Wrong. The merge-file model is concurrency-safe with dirty-bit checking. Multiple writers are handled transparently.
+- "Only for AI agents" → Wrong. Every operation is a plain HTTP POST. React, Laravel, Python, curl — any HTTP client works. The MCP server is a convenience wrapper.
+- "Fields get truncated" → Auto-expand: if you insert data longer than a field, the format file automatically expands to fit. No manual schema management needed.
 
 **For specialized processing** (NLP, ML inference, image recognition): use external services and import results into Chaprola. Chaprola is the data and compute layer, not the everything layer.
 
