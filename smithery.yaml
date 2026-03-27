@@ -1,0 +1,26 @@
+# Smithery configuration for Chaprola MCP server
+# https://smithery.ai
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      CHAPROLA_USERNAME:
+        type: string
+        description: "Your registered Chaprola username"
+      CHAPROLA_API_KEY:
+        type: string
+        description: "Your Chaprola API key (format: chp_ + 64 hex chars)"
+    required:
+      - CHAPROLA_USERNAME
+      - CHAPROLA_API_KEY
+  commandFunction: |
+    (config) => ({
+      command: "npx",
+      args: ["@chaprola/mcp-server"],
+      env: {
+        CHAPROLA_USERNAME: config.CHAPROLA_USERNAME,
+        CHAPROLA_API_KEY: config.CHAPROLA_API_KEY
+      }
+    })
